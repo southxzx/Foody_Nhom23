@@ -68,18 +68,14 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery("select Store.Id,Store.Description,Store.Name," +
                 "Image.HinhAnh from Store inner join Image on Image.Store_Id = Store.Id where " +
                 "Image.Kieuhinhanh ='thumb'", null);
-        //cursor.getReadableDatabase();
          cursor.moveToFirst();
         list.clear();
             while (!cursor.isAfterLast()) {
                 // MonAn monAn = new MonAn();
                 String Desc = cursor.getString(1);
                 String Name = cursor.getString(2);
-                byte[] Img = cursor.getBlob(3);
+                String Img = cursor.getString(3);
                 MonAn monAn = new MonAn(Name, Desc, Img);
-//            monAn.setTitle(cursor.getString(0));
-//            monAn.setDescription(cursor.getString(1));
-//            monAn.setThumbnail(cursor.getBlob(2));
                 list.add(monAn);
                 cursor.moveToNext();
             }

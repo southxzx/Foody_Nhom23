@@ -3,9 +3,9 @@ package hcmute.edu.vn.foody_23;
 public class MonAn {
     private String Title;
     private String Description;
-    private byte[] Thumbnail;
+    private String Thumbnail;
 
-    public MonAn(String title, String description, byte[] thumbnail) {
+    public MonAn(String title, String description,String thumbnail) {
         Title = title;
         Description = description;
         Thumbnail = thumbnail;
@@ -30,11 +30,11 @@ public class MonAn {
         Description = description;
     }
 
-    public byte[] getThumbnail() {
+    public String getThumbnail() {
         return Thumbnail;
     }
 
-    public void setThumbnail(byte[] thumbnail) {
+    public void setThumbnail(String thumbnail) {
         Thumbnail = thumbnail;
     }
 }

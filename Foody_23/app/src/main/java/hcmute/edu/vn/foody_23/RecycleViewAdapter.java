@@ -2,6 +2,7 @@ package hcmute.edu.vn.foody_23;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.MyViewHolder> {
@@ -21,6 +24,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     private Context mContext;
     private List<MonAn> mData;
+    assetManager assetMag = new assetManager();
 
     public RecycleViewAdapter(Context mContext, List<MonAn> mData) {
         this.mContext = mContext;
@@ -40,11 +44,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.book_title.setText(mData.get(position).getTitle());
         holder.food_des.setText(mData.get(position).getDescription());
-        byte[] hinhanh = mData.get(position).getThumbnail();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(hinhanh, 0,hinhanh.length);
-        holder.book_thumb.setImageBitmap(bitmap);
+        String fileName = mData.get(position).getThumbnail();
+        Bitmap image = null;
+        try {
+            image = assetMag.getImage(fileName,mContext);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        holder.book_thumb.setImageBitmap(image);
     }
-
     @Override
     public int getItemCount() {
         return mData.size();
